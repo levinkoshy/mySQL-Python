@@ -1,0 +1,11 @@
+create table freddata.gdpc_table (observation_date VARCHAR(20), GDPC1 DOUBLE, realtime_start_date VARCHAR(20), realtime_end_date VARCHAR(20));
+
+create table freddata.umscent_table (observation_date VARCHAR(20), UMCSENT DOUBLE, realtime_start_date VARCHAR(20), realtime_end_date VARCHAR(20));
+
+create table freddata.unrate_table (observation_date VARCHAR(20), UNRATE DOUBLE, realtime_start_date VARCHAR(20), realtime_end_date VARCHAR(20));
+
+//query to get average unemployment rate
+select SUBSTR(observation_date,1,4) year, AVG(UNRATE) 
+from freddata.umrate_table
+where convert(SUBSTR(observation_date,1,4), unsigned int) between 1980 and 2015 
+group by SUBSTR(observation_date,1,4)
